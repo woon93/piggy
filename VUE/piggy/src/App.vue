@@ -1,7 +1,6 @@
 <template>
   <div id="app">
-    <!-- <img src="./assets/logo.png"> -->
-	<img src="./assets/小猪.jpg" style="height: 300px;">
+    <img src="./assets/piggy.jpg" height="300px">
     <router-view/>
   </div>
 </template>
