@@ -1,5 +1,6 @@
 package cn.keepingthepiggy.leetCode.testCase;
 
+import cn.keepingthepiggy.leetCode.Paramz;
 import cn.keepingthepiggy.leetCode.TestCase;
 
 /**
@@ -8,13 +9,16 @@ import cn.keepingthepiggy.leetCode.TestCase;
  * 示例 1:
  *
  * 输入: "abcabcbb"
+ *
  * 输出: 3
  * 解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
+ *
  * 示例 2:
  *
  * 输入: "bbbbb"
  * 输出: 1
  * 解释: 因为无重复字符的最长子串是 "b"，所以其长度为 1。
+ *
  * 示例 3:
  *
  * 输入: "pwwkew"
@@ -26,16 +30,19 @@ import cn.keepingthepiggy.leetCode.TestCase;
 public class Three extends TestCase {
     @Override
     public void newParam() {
-        super.newParam();
+        params = new Paramz[]{new Paramz()};
     }
 
     @Override
     public void initParam() {
-        super.initParam();
+        params[0].str = "abcabcabc";
     }
 
     @Override
     public void test() {
-        super.test();
+        String s = params[0].str;
+
+
+
     }
 }
