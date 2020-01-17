@@ -22,13 +22,19 @@ public class Two extends TestCase {
 
     @Override
     void initParam() {
-        ListNode nodeLeft = new ListNode(0);
-        nodeLeft.next = new ListNode(1);
-//        nodeLeft.next.next = new ListNode(7);
+        ListNode nodeLeft = new ListNode(4);
+        nodeLeft.next = new ListNode(5);
+        nodeLeft.next.next = new ListNode(6);
+        nodeLeft.next.next.next = new ListNode(7);
+        nodeLeft.next.next.next.next = new ListNode(8);
 
         ListNode nodeRight = new ListNode(0);
         nodeRight.next = new ListNode(1);
         nodeRight.next.next = new ListNode(2);
+        nodeRight.next.next.next = new ListNode(3);
+        nodeRight.next.next.next.next = new ListNode(4);
+        nodeRight.next.next.next.next.next = new ListNode(5);
+        nodeRight.next.next.next.next.next.next = new ListNode(6);
 
 
         params[0].listNode = nodeLeft;
@@ -75,4 +81,40 @@ public class Two extends TestCase {
 
         params[2].listNode = sums;
     }
+
+//    @Override
+//    void test() {
+//        ListNode l1 = params[0].listNode;
+//        ListNode l2 = params[1].listNode;
+//
+//        ListNode c1 = l1;
+//        ListNode c2 = l2;
+//        ListNode result = new ListNode(0);
+//        ListNode current = result;
+//        int sum, carry = 0;
+//        while (c1 != null || c2 != null) {
+//            int aVal = 0;
+//            int bVal = 0;
+//            if (c1 != null) {
+//                aVal = c1.val;
+//            }
+//            if (c2 != null) {
+//                bVal = c2.val;
+//            }
+//            sum = aVal + bVal + carry;
+//            carry = sum / 10;
+//            current.next = new ListNode(sum % 10);
+//            current = current.next;
+//            if (carry > 0) {
+//                current.next = new ListNode(carry);
+//            }
+//            if (c1 != null) {
+//                c1 = c1.next;
+//            }
+//            if (c2 != null) {
+//                c2 = c2.next;
+//            }
+//        }
+//        System.out.println(result.next.toString());
+//    }
 }
