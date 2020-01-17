@@ -1,4 +1,10 @@
-package cn.keepingthepiggy.leetCode;
+package cn.keepingthepiggy.leetCode.testCase;
+
+
+
+
+import cn.keepingthepiggy.leetCode.Paramz;
+import cn.keepingthepiggy.leetCode.TestCase;
 
 import java.util.*;
 
@@ -19,7 +25,7 @@ import java.util.*;
  */
 public class One extends TestCase {
     @Override
-    void newParam() {
+    public void newParam() {
         params = new Paramz[]{new Paramz(),new Paramz()};
     };
 

@@ -1,4 +1,9 @@
-package cn.keepingthepiggy.leetCode;
+package cn.keepingthepiggy.leetCode.testCase;
+
+
+import cn.keepingthepiggy.leetCode.ListNode;
+import cn.keepingthepiggy.leetCode.Paramz;
+import cn.keepingthepiggy.leetCode.TestCase;
 
 /**
  * 给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。
@@ -16,12 +21,12 @@ package cn.keepingthepiggy.leetCode;
  */
 public class Two extends TestCase {
     @Override
-    void newParam() {
+    public void newParam() {
         params = new Paramz[]{new Paramz(), new Paramz(), new Paramz()};
     }
 
     @Override
-    void initParam() {
+    public void initParam() {
         ListNode nodeLeft = new ListNode(4);
         nodeLeft.next = new ListNode(5);
         nodeLeft.next.next = new ListNode(6);
@@ -45,7 +50,7 @@ public class Two extends TestCase {
     }
 
     @Override
-    void test() {
+    public void test() {
         ListNode l1 = params[0].listNode;
         ListNode l2 = params[1].listNode;
 
