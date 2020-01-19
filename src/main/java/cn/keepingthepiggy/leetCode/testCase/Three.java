@@ -3,7 +3,9 @@ package cn.keepingthepiggy.leetCode.testCase;
 import cn.keepingthepiggy.leetCode.Paramz;
 import cn.keepingthepiggy.leetCode.TestCase;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -37,54 +39,48 @@ public class Three extends TestCase {
 
     @Override
     public void initParam() {
-        params[0].str = "abcabcabcabc123451234512345123654123654";
+        params[0].str = "pwwkew";
     }
     // abcabcabcabc123451234512345123654123654
+    // dvdf
 
     @Override
     public void test() {
         String s = params[0].str;
 
-        String sub = compent(s);
+//        int maxSub = comparator(s, 0, 0, new ArrayList<>());
+//        System.out.println(maxSub);
 
-        System.out.println(sub);
-    }
-
-    private String compent(String s) {
-        String subs = "";
-        StringBuilder sb = new StringBuilder("");
-        Map<Character, Integer> map = new HashMap<>();
+        int maxSub = 0;
+        Map<Character, Integer> currList = new HashMap<>();
         for (int i = 0; i < s.length(); i++) {
             Character cr = s.charAt(i);
-            if (map.get(cr) != null) {
-                sb.setLength(0);
-                i = compare(map, sb, s, i);
-                if (subs.length() < sb.length()) {
-                    subs = sb.toString();
-                }
+            if (currList.get(cr) != null) {
+                i = currList.get(cr) + 1;
+                currList.clear();
+            }
+            currList.put(cr, i);
+            maxSub = Math.max(maxSub, currList.size());
+        }
+        System.out.println(maxSub);
+        System.out.println(currList);
+    }
+
+    // dvdf
+    // dvdvdfasd
+    private int comparator(String s, int maxSub, int start, List currList) {
+        currList.clear();
+        for (int i = 0; i < s.length(); i++) {
+            Character cr = s.charAt(i);
+            if (currList.contains(cr)) {
+                maxSub = Math.max(comparator(s, Math.max(maxSub, i), i + 1, currList), i);
+                break;
             } else {
-                map.put(cr, i);
+                currList.add(cr);
+                maxSub = currList.size();
             }
         }
-
-//        return subs;
-
-        if (!"".equals(subs) && subs.length() > 2) {
-            s = compent(subs);
-        } else {
-            return s;
-        }
-        return s;
+        return maxSub;
     }
 
-    private int compare(Map<Character, Integer> map, StringBuilder sb, String s, int i) {
-        sb.append(s.charAt(i));
-        int front = map.get(s.charAt(i));
-        if (i < s.length() - 1 && s.charAt(front + 1) == s.charAt(i + 1)) {
-            i = compare(map, sb, s, i + 1);
-        } else {
-            return i;
-        }
-        return i;
-    }
 }

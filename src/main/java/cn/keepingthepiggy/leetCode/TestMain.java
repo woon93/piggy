@@ -1,5 +1,6 @@
 package cn.keepingthepiggy.leetCode;
 
+import cn.keepingthepiggy.leetCode.testCase.Three;
 import cn.keepingthepiggy.leetCode.testCase.ThreeAlter;
 
 import java.time.LocalDateTime;
@@ -7,7 +8,7 @@ import java.time.temporal.ChronoUnit;
 
 public class TestMain {
 
-    private static TestCase test = new ThreeAlter();
+    private static TestCase test = new Three();
 
     public static void main(String[] args) {
         ////////////////////////////////////////////////////
