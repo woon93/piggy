@@ -3,7 +3,9 @@ package cn.keepingthepiggy.leetCode;
 public abstract class TestCase{
     public Paramz[] params;
 
-    public void newParam() {};
+    public void newParam() {
+        params = new Paramz[]{new Paramz(),new Paramz()};
+    };
 
     public void initParam() {};
 
