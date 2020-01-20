@@ -2,8 +2,8 @@ package cn.keepingthepiggy.leetCode.testCase;
 
 import cn.keepingthepiggy.leetCode.Paramz;
 import cn.keepingthepiggy.leetCode.TestCase;
+import com.sun.istack.internal.NotNull;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,10 +39,11 @@ public class Three extends TestCase {
 
     @Override
     public void initParam() {
-        params[0].str = "aqwaerwtyqdfxvb";
+        params[0].str = "dvdf";
     }
     // abcabcabcabc123451234512345123654123654
     // dvdf
+    // aqwaerwtyqdfxvb
 
     @Override
     public void test() {
@@ -50,12 +51,14 @@ public class Three extends TestCase {
 
         int maxSub = 0;
 //        maxSub = recursion(s, 0, new ArrayList<>());
-        maxSub = comparator(s);
+//        maxSub = comparator(s);
+        maxSub = fiveMs(s);
+//        maxSub = twoMs(s);
         System.out.println(maxSub);
     }
 
     // 递归解法
-    private int recursion(String s, int maxSub, List currList) {
+    private int recursion(String s, int maxSub, List<Character> currList) {
         currList.clear();
         for (int i = 0; i < s.length(); i++) {
             Character cr = s.charAt(i);
@@ -78,7 +81,7 @@ public class Three extends TestCase {
         for (int i = 0; i < s.length(); i++) {
             Character cr = s.charAt(i);
             Integer preIdx = map.get(cr);
-            if (preIdx != null) {
+            if (preIdx != null ) {
                 startIdx = Math.max(startIdx, preIdx + 1);
             }
             map.put(cr, i);
@@ -88,4 +91,34 @@ public class Three extends TestCase {
     }
 
 
+    // 5ms -> 把map用数组实现了
+    public int fiveMs(String s) {
+        int l = 0, r = 0;
+        int[] freq = new int[256];
+        int res = 0;
+        while (r < s.length()) {
+            l = Math.max(l, freq[s.charAt(r)]);
+            freq[s.charAt(r)] = ++r;
+            res = Math.max(res, r - l);
+        }
+        return res;
+    }
+
+
+    // 2ms 把map的get和put用循环实现
+    public int twoMs(String s) {
+        char[] chars = s.toCharArray();
+        int leftIndex = 0;
+        int maxLength = 0;
+        for (int j = 0; j < chars.length; j++) {
+            for (int innerIndex = leftIndex; innerIndex < j; innerIndex++) {
+                if (chars[innerIndex] == chars[j]) {
+                    maxLength = Math.max(maxLength, j - leftIndex);
+                    leftIndex = innerIndex + 1;
+                    break;
+                }
+            }
+        }
+        return Math.max(chars.length - leftIndex, maxLength);
+    }
 }
