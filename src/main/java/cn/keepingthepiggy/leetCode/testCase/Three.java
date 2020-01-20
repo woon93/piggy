@@ -39,7 +39,7 @@ public class Three extends TestCase {
 
     @Override
     public void initParam() {
-        params[0].str = "pwwkew";
+        params[0].str = "abcabcabcabc123451234512345123654123654";
     }
     // abcabcabcabc123451234512345123654123654
     // dvdf
@@ -48,36 +48,22 @@ public class Three extends TestCase {
     public void test() {
         String s = params[0].str;
 
-//        int maxSub = comparator(s, 0, 0, new ArrayList<>());
-//        System.out.println(maxSub);
-
-        int maxSub = 0;
-        Map<Character, Integer> currList = new HashMap<>();
-        for (int i = 0; i < s.length(); i++) {
-            Character cr = s.charAt(i);
-            if (currList.get(cr) != null) {
-                i = currList.get(cr) + 1;
-                currList.clear();
-            }
-            currList.put(cr, i);
-            maxSub = Math.max(maxSub, currList.size());
-        }
+        int maxSub = comparator(s, 0, new ArrayList<>());
         System.out.println(maxSub);
-        System.out.println(currList);
     }
 
-    // dvdf
+    // dvdf    abcabcbb
     // dvdvdfasd
-    private int comparator(String s, int maxSub, int start, List currList) {
+    private int comparator(String s, int maxSub, List currList) {
         currList.clear();
         for (int i = 0; i < s.length(); i++) {
             Character cr = s.charAt(i);
             if (currList.contains(cr)) {
-                maxSub = Math.max(comparator(s, Math.max(maxSub, i), i + 1, currList), i);
+                maxSub = Math.max(comparator(s.substring(s.indexOf(cr)+1,s.length()), Math.max(maxSub, i), currList), i);
                 break;
             } else {
                 currList.add(cr);
-                maxSub = currList.size();
+                maxSub = Math.max(currList.size(), i);
             }
         }
         return maxSub;
