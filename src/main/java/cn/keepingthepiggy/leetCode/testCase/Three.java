@@ -39,7 +39,7 @@ public class Three extends TestCase {
 
     @Override
     public void initParam() {
-        params[0].str = "abcabcabcabc123451234512345123654123654";
+        params[0].str = "aqwaerwtyqdfxvb";
     }
     // abcabcabcabc123451234512345123654123654
     // dvdf
@@ -48,25 +48,44 @@ public class Three extends TestCase {
     public void test() {
         String s = params[0].str;
 
-        int maxSub = comparator(s, 0, new ArrayList<>());
+        int maxSub = 0;
+//        maxSub = recursion(s, 0, new ArrayList<>());
+        maxSub = comparator(s);
         System.out.println(maxSub);
     }
 
-    // dvdf    abcabcbb
-    // dvdvdfasd
-    private int comparator(String s, int maxSub, List currList) {
+    // 递归解法
+    private int recursion(String s, int maxSub, List currList) {
         currList.clear();
         for (int i = 0; i < s.length(); i++) {
             Character cr = s.charAt(i);
             if (currList.contains(cr)) {
-                maxSub = Math.max(comparator(s.substring(s.indexOf(cr)+1,s.length()), Math.max(maxSub, i), currList), i);
+                maxSub = Math.max(recursion(s.substring(s.indexOf(cr) + 1, s.length()), Math.max(maxSub, i), currList), i);
                 break;
             } else {
                 currList.add(cr);
-                maxSub = Math.max(currList.size(), i);
+                maxSub = i + 1;
             }
         }
         return maxSub;
     }
+
+    // 列表映射解法
+    private int comparator(String s) {
+        Map<Character, Integer> map = new HashMap<>();
+        int startIdx = 0;
+        int dist = 0;
+        for (int i = 0; i < s.length(); i++) {
+            Character cr = s.charAt(i);
+            Integer preIdx = map.get(cr);
+            if (preIdx != null) {
+                startIdx = Math.max(startIdx, preIdx + 1);
+            }
+            map.put(cr, i);
+            dist = Math.max(dist, i - startIdx + 1);
+        }
+        return dist;
+    }
+
 
 }
