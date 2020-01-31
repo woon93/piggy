@@ -100,8 +100,6 @@ public class Four extends TestCase {
                 } else {
                     if (times > middle) {
                         minIdx = (detector == 0) ? 1 : detector;
-//                        int maxIdx = i == 0 ? 1 : i;
-//                        int pre = listMin[minIdx - 1] >= listMax[maxIdx - 1] ? listMin[minIdx - 1] : listMax[maxIdx - 1];
                         target = (double) (listMin[minIdx - 1] + listMax[i]) / 2;
                         System.out.println("listMin[minIdx - 1]：" + listMin[minIdx - 1]);
                         System.out.println("listMax[i]：" + listMax[i]);
