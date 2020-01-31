@@ -17,9 +17,10 @@ public class Experiment {
         nextList.add(3);
         System.out.println("开始: " + nextList);
 
-        List<Integer> newList =  nextList.subList(1,nextList.size());
+        List<Integer> newList = nextList.subList(1, nextList.size());
         System.out.println("结束: " + nextList);
         System.out.println("结束: " + newList);
+
 
 //        Map<Character, List<Integer>> map = new HashMap();
 //        map.put('a', new ArrayList<Integer>() );
@@ -62,7 +63,45 @@ public class Experiment {
     }
 
 
-    private static void t1(StringBuilder str){
+    private static void t1(StringBuilder str) {
         str.append("666");
     }
+
+
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int[] listMax = nums1.length >= nums2.length ? nums1 : nums2;
+        int[] listMin = nums1.length < nums2.length ? nums1 : nums2;
+        int lenMIn = listMin.length;
+        double middle = ((double) nums1.length + (double) nums2.length) / 2;
+        boolean isOdd = middle * 100 % 100 != 0;
+        int times = 0;
+        int detector = 0;
+        double target = 0;
+
+        for (int i = 0; i < listMax.length - 1; i++) {
+            if (detector < lenMIn && listMin[detector] <= listMax[i]) {
+                times++;
+                detector++;
+            }
+            times++;
+            if (times >= middle) {
+                if (isOdd) {
+                    if (times - middle < 1.00) {
+                        return listMax[i];
+                    } else {
+                        return listMin[detector - 1];
+                    }
+                } else {
+                    if (times > middle) {
+                        return (double) (listMin[detector - 1] + listMax[i]) / 2;
+                    } else {
+                        int next = (listMin[detector] <= listMax[i + 1]) ? listMin[detector] : listMax[i + 1];
+                        return (double) (listMax[i] + next) / 2;
+                    }
+                }
+            }
+        }
+        return 0;
+    }
+
 }

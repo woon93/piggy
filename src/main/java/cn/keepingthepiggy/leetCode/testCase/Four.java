@@ -35,8 +35,8 @@ public class Four extends TestCase {
 
     @Override
     public void initParam() {
-        params[0].nums = new int[]{1, 3, 5, 6, 9, 9, 9, 9};
-        params[1].nums = new int[]{2, 4, 6};
+        params[0].nums = new int[]{3};
+        params[1].nums = new int[]{1,2};
     }
 
     @Override
@@ -47,15 +47,13 @@ public class Four extends TestCase {
 
         int[] listMax = nums1.length >= nums2.length ? nums1 : nums2;
         int[] listMin = nums1.length < nums2.length ? nums1 : nums2;
-        System.out.println("listMax: " + Arrays.toString(listMax));
-        System.out.println("listMin: " + Arrays.toString(listMin));
-
-        int lenMIn = listMin.length;
 
         double middle = ((double) nums1.length + (double) nums2.length) / 2;
-        System.out.println("middle: " + middle);
-        System.out.println("middle * 100 % 100: " + middle * 100 % 100);
         boolean isOdd = middle * 100 % 100 != 0;
+
+        System.out.println("listMax: " + Arrays.toString(listMax));
+        System.out.println("listMin: " + Arrays.toString(listMin));
+        System.out.println("middle: " + middle);
         System.out.println("isOdd: " + isOdd);
 
         int times = 0;
@@ -64,38 +62,66 @@ public class Four extends TestCase {
         double target = 0;
 
         for (int i = 0; i < listMax.length; i++) {
+            for (int j = detector; j < listMin.length; j++) {
+                if (listMin[detector] > listMax[i]) {
+                    break;
+                }
 
-            if (i < lenMIn && listMin[detector] <= listMax[i]) {
-                times++;
+                if (times >= middle) {
+                    if (isOdd) {
+                        target = listMin[detector - 1];
+                        System.out.println("target: " + target);
+                        return;
+                    } else {
+                        target = (double) (listMin[detector] + listMin[detector - 1]) / 2;
+                        System.out.println("target: " + target);
+                        return;
+                    }
+                }
                 detector++;
+                times++;
             }
             times++;
 
+            int minIdx = 0;
             if (times >= middle) {
                 if (isOdd) {
                     if (times - middle < 1.00) {
                         target = listMax[i];
                     } else {
-                        target = listMin[detector - 1];
+                        minIdx = (detector == 0) ? 1 : detector;
+                        target = listMin[minIdx - 1] >= listMax[i - 1] ? listMin[minIdx - 1] : listMax[i - 1];
                     }
                     System.out.println("is Odd");
-                    System.out.println("detector: " + detector);
+                    System.out.println("minIdx: " + minIdx);
                     System.out.println("times: " + times);
                     System.out.println("target: " + target);
-                    break;
+                    return;
                 } else {
                     if (times > middle) {
-                        target = (double) (listMin[detector - 1] + listMax[i]) / 2;
+                        minIdx = (detector == 0) ? 1 : detector;
+//                        int maxIdx = i == 0 ? 1 : i;
+//                        int pre = listMin[minIdx - 1] >= listMax[maxIdx - 1] ? listMin[minIdx - 1] : listMax[maxIdx - 1];
+                        target = (double) (listMin[minIdx - 1] + listMax[i]) / 2;
+                        System.out.println("listMin[minIdx - 1]：" + listMin[minIdx - 1]);
+                        System.out.println("listMax[i]：" + listMax[i]);
                     } else {
-                        int next = (listMin[detector] <= listMax[i + 1]) ? listMin[detector] : listMax[i + 1];
+                        minIdx = detector == listMin.length ? detector - 1 : detector;
+                        int next = 0;
+                        if (listMin.length != 0 && (i == listMax.length - 1 || listMin[minIdx] >= listMax[i]
+                                && listMin[minIdx] <= listMax[i + 1])) {
+                            next = listMin[minIdx];
+                        } else {
+                            next = listMax[i + 1];
+                        }
                         target = (double) (listMax[i] + next) / 2;
                     }
 
                     System.out.println("is Not Odd");
-                    System.out.println("detector: " + detector);
+                    System.out.println("minIdx: " + minIdx);
                     System.out.println("times: " + times);
                     System.out.println("target: " + target);
-                    break;
+                    return;
                 }
             }
 
