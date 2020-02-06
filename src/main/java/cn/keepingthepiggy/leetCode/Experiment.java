@@ -1,9 +1,6 @@
 package cn.keepingthepiggy.leetCode;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Experiment {
     public static void main(String[] args) {
@@ -69,39 +66,34 @@ public class Experiment {
 
 
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-        int[] listMax = nums1.length >= nums2.length ? nums1 : nums2;
-        int[] listMin = nums1.length < nums2.length ? nums1 : nums2;
-        int lenMIn = listMin.length;
-        double middle = ((double) nums1.length + (double) nums2.length) / 2;
-        boolean isOdd = middle * 100 % 100 != 0;
-        int times = 0;
-        int detector = 0;
-        double target = 0;
-
-        for (int i = 0; i < listMax.length - 1; i++) {
-            if (detector < lenMIn && listMin[detector] <= listMax[i]) {
-                times++;
-                detector++;
-            }
-            times++;
-            if (times >= middle) {
-                if (isOdd) {
-                    if (times - middle < 1.00) {
-                        return listMax[i];
-                    } else {
-                        return listMin[detector - 1];
-                    }
-                } else {
-                    if (times > middle) {
-                        return (double) (listMin[detector - 1] + listMax[i]) / 2;
-                    } else {
-                        int next = (listMin[detector] <= listMax[i + 1]) ? listMin[detector] : listMax[i + 1];
-                        return (double) (listMax[i] + next) / 2;
-                    }
-                }
-            }
+        if (nums1.length > nums2.length) {
+            return findMedianSortedArrays(nums2, nums1);
         }
-        return 0;
+        int i, j, min1 = 0, max1 = nums1.length;
+        do {
+            i = (min1 + max1) % 2 == 0 ? (min1 + max1) / 2 : (min1 + max1 + 1) / 2;
+            j = (nums1.length + nums2.length) / 2 - i;
+            if (i > 0 && nums1[i - 1] > nums2[j]) {
+                max1 = i - 1;
+            }
+            else if (i < nums1.length && nums1[i] < nums2[j - 1]) {
+                min1 = i + 1;
+            }
+            else {
+                int next = 0;
+                if (i == nums1.length) next = nums2[j];
+                else if (j == nums2.length) next = nums1[i];
+                else next = nums1[i] <= nums2[j] ? nums1[i] : nums2[j];
+                if ((nums1.length + nums2.length) % 2 != 0) {
+                    return next;
+                }
+                int pre = 0;
+                if (i == 0) pre = nums2[j - 1];
+                else if (j == 0) pre = nums1[i - 1];
+                else pre = nums1[i - 1] >= nums2[j - 1] ? nums1[i - 1] : nums2[j - 1];
+                return (pre + next) * 0.5;
+            }
+        } while (true);
     }
 
 }
