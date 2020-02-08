@@ -26,21 +26,12 @@ public class Five extends TestCase {
 
     @Override
     public void initParam() {
-        params[0].str = "aaacvvvvvvcasdx";
+        params[0].str = "";
     }
 
     @Override
     public void test() {
         String s = params[0].str;
-
-        if ("".equals(s)) {
-            System.out.println("");
-            return;
-        }
-        if (s.length() == 1) {
-            System.out.println(s);
-            return;
-        }
 
         StringBuilder rs = new StringBuilder();
         int model = 0, count, start, temp, step;
