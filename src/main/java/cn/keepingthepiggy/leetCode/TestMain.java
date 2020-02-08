@@ -1,5 +1,6 @@
 package cn.keepingthepiggy.leetCode;
 
+import cn.keepingthepiggy.leetCode.testCase.Five;
 import cn.keepingthepiggy.leetCode.testCase.Four;
 import cn.keepingthepiggy.leetCode.testCase.Three;
 import cn.keepingthepiggy.leetCode.testCase.ThreeAlter;
@@ -9,7 +10,7 @@ import java.time.temporal.ChronoUnit;
 
 public class TestMain {
 
-    private static TestCase test = new Four();
+    private static TestCase test = new Five();
 
     public static void main(String[] args) {
         ////////////////////////////////////////////////////
