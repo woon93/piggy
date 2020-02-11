@@ -29,17 +29,27 @@ public class RegisterContoller {
         Map<String, String> responsible = new HashMap<>();
         responsible.put("flag", "0");
         if (info != null) {
-            logger.info("register:" + info.toString());
+            logger.info("login:" + info.toString());
+            int count = getCount(info);
+            if (count > 1) {
+                responsible.put("flag", "2");
+                return responsible;
+            }
+
             RegisterInfoExample example = new RegisterInfoExample();
             RegisterInfoExample.Criteria criteria = example.createCriteria();
             // 【KEY】
             criteria.andAccountEqualTo(info.getUsername());
+            criteria.andPazwordEqualTo(info.getPassword());
             criteria.andDelflagNotEqualTo("1");
             //  excute Mapper
             List<RegisterInfo> infos = mapping.selectByExample(example);
-            if (infos != null && !infos.isEmpty())
+
+            if (!infos.isEmpty())
                 responsible.put("flag", "1");
+
         }
+        logger.info("flag:" + responsible.get("flag"));
         return responsible;
     }
 
@@ -48,14 +58,40 @@ public class RegisterContoller {
         Map<String, String> responsible = new HashMap<>();
         if (info != null) {
             logger.info("register:" + info.toString());
+            int count = getCount(info);
+            if (count > 0) {
+                responsible.put("flag", "2");
+                logger.info("flag:" + responsible.get("flag"));
+                return responsible;
+            }
+
+            if (info.getPassword() == null || "".equals(info.getPassword())){
+                responsible.put("flag", "1");
+                logger.info("flag:" + responsible.get("flag"));
+                return responsible;
+            }
+
             RegisterInfo registerInfo = new RegisterInfo();
-            convertor.convertor(info,registerInfo);
             registerInfo.setAccount(info.getUsername());
             registerInfo.setPazword(info.getPassword());
-            //  excute Mapper
             mapping.insertSelective(registerInfo);
             responsible.put("flag", "1");
+
         }
+        logger.info("flag:" + responsible.get("flag"));
         return responsible;
+    }
+
+    private int getCount(RegisterModel info) {
+        RegisterInfoExample example = new RegisterInfoExample();
+        RegisterInfoExample.Criteria criteria = example.createCriteria();
+        // 【KEY】
+        criteria.andAccountEqualTo(info.getUsername());
+        //  excute Mapper
+        List<RegisterInfo> infos = mapping.selectByExample(example);
+        if (infos != null && !infos.isEmpty())
+            return infos.size();
+        else
+            return 0;
     }
 }
