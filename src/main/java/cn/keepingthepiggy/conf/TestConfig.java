@@ -1,8 +1,6 @@
 package cn.keepingthepiggy.conf;
 
-import cn.keepingthepiggy.letus.TheName;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 @org.springframework.context.annotation.Configuration
 public class TestConfig {

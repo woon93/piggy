@@ -1,19 +1,13 @@
 package cn.keepingthepiggy;
 
-import cn.keepingthepiggy.conf.TestConfig;
-import cn.keepingthepiggy.letus.HelloWorld;
-import cn.keepingthepiggy.letus.TheName;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author wang
  */
 @SpringBootApplication
+//@MapperScan("cn/keepingthepiggy/letus/Dao")
 public class PiggyApplication {
 
 	public static void main(String[] args) {

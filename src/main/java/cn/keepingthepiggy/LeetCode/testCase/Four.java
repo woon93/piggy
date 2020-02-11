@@ -1,8 +1,6 @@
-package cn.keepingthepiggy.leetCode.testCase;
+package cn.keepingthepiggy.LeetCode.testCase;
 
-import cn.keepingthepiggy.leetCode.Paramz;
-import cn.keepingthepiggy.leetCode.TestCase;
-import sun.font.DelegatingShape;
+import cn.keepingthepiggy.LeetCode.TestCase;
 
 import java.util.Arrays;
 

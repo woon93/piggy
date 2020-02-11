@@ -1,4 +1,4 @@
-package cn.keepingthepiggy.leetCode;
+package cn.keepingthepiggy.LeetCode;
 
 public class Paramz {
     public ListNode listNode = null;

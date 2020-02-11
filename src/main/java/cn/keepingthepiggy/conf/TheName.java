@@ -1,4 +1,4 @@
-package cn.keepingthepiggy.letus;
+package cn.keepingthepiggy.conf;
 
 public class TheName {
     public String name;

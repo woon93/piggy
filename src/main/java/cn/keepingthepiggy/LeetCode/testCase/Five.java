@@ -1,9 +1,6 @@
-package cn.keepingthepiggy.leetCode.testCase;
+package cn.keepingthepiggy.LeetCode.testCase;
 
-import cn.keepingthepiggy.leetCode.TestCase;
-
-import java.util.ArrayList;
-import java.util.List;
+import cn.keepingthepiggy.LeetCode.TestCase;
 
 /**
  * 给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。
