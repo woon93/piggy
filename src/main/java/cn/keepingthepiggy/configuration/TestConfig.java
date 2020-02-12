@@ -1,4 +1,4 @@
-package cn.keepingthepiggy.conf;
+package cn.keepingthepiggy.configuration;
 
 import org.springframework.context.annotation.Bean;
 

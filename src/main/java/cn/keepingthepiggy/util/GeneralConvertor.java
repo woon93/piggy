@@ -1,8 +1,11 @@
-package cn.keepingthepiggy.service;
+package cn.keepingthepiggy.util;
 
 
 import org.dozer.Mapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.test.context.ContextConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,10 +15,11 @@ import java.util.TreeSet;
 /**
  * dozer 转换器
  */
-@Component
+//@ContextConfiguration(locations = {"classpath:spring/spring-dozer.xml"})
+@Service
 public class GeneralConvertor {
 
-//    @Autowired
+    @Autowired
     Mapper mapper;
 
     /**

@@ -1,4 +1,4 @@
-package cn.keepingthepiggy.conf;
+package cn.keepingthepiggy.configuration;
 
 public class TheName {
     public String name;

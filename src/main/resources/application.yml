@@ -1,0 +1,67 @@
+#服务器debug：
+# java -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=3009 -Xmx2048M -jar xxx.jar
+
+spring:
+  devtools: #热部署
+    restart:
+      enabled: true  #热部署生效
+      additional-paths: src/main/java  #设置重启的目录，检索目录(resources/static、resources/templates)
+      exclude: WEB-INF/**   #classpath目录下的WEB-INF文件夹内容修改不重启
+
+  # application:
+    # name: Piggy     #应用名称
+
+  datasource:  #数据库相关
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # url: jdbc:mysql://127.0.0.1:3306/myshow?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://49.234.205.150:3306/myshow?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
+    username: wang
+    password: dawang
+    # max-idle: 10
+    # max-wait: 10000
+    # min-idle: 5
+    # initial-size: 5
+
+jwt:
+  tokenHeader: Authorization
+  tokenPrefix: Bearer
+  secret: lanjwt
+  expiration: 3600
+  rememberExpiration: 604800
+
+  #访问根路径
+#logback输出日志配置
+logging:
+  config: classpath:logback-spring.xml
+  #  控制屏蔽对应包的日志打印
+  #  level:
+  #   com.springboot.sixmonth.controller: 'off'
+
+
+server:
+  port: 8080    #访问端口号
+  servlet:
+    session:
+      timeout: 30m  #session生命周期
+  tomcat:
+    uri-encoding: utf-8  #编码格式
+
+
+## 该配置节点为独立的节点，有很多同学容易将这个配置放在spring的节点下，导致配置无法被识别
+mybatis:
+  mapper-locations: classpath:mapper/*.xml   #注意：一定要对应mapper映射xml文件的所在路径
+  type-aliases-package: cn/keepingthepiggy/dataModel  # 注意：对应实体类的路径
+
+
+#pagehelper分页插件
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params:
+    count=countSql
+
+##ueditor配置
+#web:
+#    upload-path: 'E:/union/src/main/resources/static/pictures/'

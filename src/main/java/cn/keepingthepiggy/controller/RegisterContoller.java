@@ -3,7 +3,7 @@ package cn.keepingthepiggy.controller;
 import cn.keepingthepiggy.dao.RegisterInfoMapper;
 import cn.keepingthepiggy.dataModel.RegisterInfo;
 import cn.keepingthepiggy.dataModel.RegisterInfoExample;
-import cn.keepingthepiggy.service.GeneralConvertor;
+import cn.keepingthepiggy.util.GeneralConvertor;
 import cn.keepingthepiggy.viewModel.RegisterModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,8 +72,10 @@ public class RegisterContoller {
             }
 
             RegisterInfo registerInfo = new RegisterInfo();
-            registerInfo.setAccount(info.getUsername());
-            registerInfo.setPazword(info.getPassword());
+//            registerInfo.setAccount(info.getUsername());
+//            registerInfo.setPazword(info.getPassword());
+
+            convertor.convertor(info,registerInfo);
             mapping.insertSelective(registerInfo);
             responsible.put("flag", "1");
 

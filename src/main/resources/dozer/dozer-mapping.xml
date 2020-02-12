@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://dozer.sourceforge.net"
+          xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+<!--    用户信息-->
+<!--    <mapping>-->
+<!--        &lt;!&ndash;对应的实体和要转换成的VO&ndash;&gt;-->
+<!--        <class-a>cn.keepingthepiggy.viewModel.RegisterModel</class-a>-->
+<!--        <class-b>cn.keepingthepiggy.dataModel.RegisterInfo</class-b>-->
+<!--        &lt;!&ndash;对应要转换的属性名.<a>和<class-a>对应，其它同理&ndash;&gt;-->
+<!--        <field>-->
+<!--            <a>username</a>-->
+<!--            <b>account</b>-->
+<!--        </field>-->
+<!--        <field>-->
+<!--            <a>password</a>-->
+<!--            <b>pazword</b>-->
+<!--        </field>-->
+<!--    </mapping>-->
+
+
+
+</mappings>
