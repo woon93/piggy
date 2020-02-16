@@ -1,4 +1,4 @@
-package cn.keepingthepiggy.LeetCode;
+package LeetCode;
 
 import java.util.*;
 

@@ -1,4 +1,4 @@
-package cn.keepingthepiggy.LeetCode;
+package LeetCode;
 
 /**
  * Definition for singly-linked list.

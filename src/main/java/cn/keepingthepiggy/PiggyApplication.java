@@ -7,8 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author wang
  */
 @SpringBootApplication
-//@MapperScan("cn/keepingthepiggy/letus/Dao")
 public class PiggyApplication {
+
+
 
 	public static void main(String[] args) {
 //		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(TestConfig.class);

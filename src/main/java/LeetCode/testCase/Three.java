@@ -1,7 +1,7 @@
-package cn.keepingthepiggy.LeetCode.testCase;
+package LeetCode.testCase;
 
-import cn.keepingthepiggy.LeetCode.Paramz;
-import cn.keepingthepiggy.LeetCode.TestCase;
+import LeetCode.Paramz;
+import LeetCode.TestCase;
 
 import java.util.HashMap;
 import java.util.List;

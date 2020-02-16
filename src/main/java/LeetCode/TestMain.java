@@ -1,6 +1,6 @@
-package cn.keepingthepiggy.LeetCode;
+package LeetCode;
 
-import cn.keepingthepiggy.LeetCode.testCase.Five;
+import LeetCode.testCase.Five;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;

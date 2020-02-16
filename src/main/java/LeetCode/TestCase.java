@@ -1,4 +1,4 @@
-package cn.keepingthepiggy.LeetCode;
+package LeetCode;
 
 public abstract class TestCase{
     public Paramz[] params;

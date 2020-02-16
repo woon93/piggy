@@ -1,6 +1,6 @@
-package cn.keepingthepiggy.LeetCode.testCase;
+package LeetCode.testCase;
 
-import cn.keepingthepiggy.LeetCode.TestCase;
+import LeetCode.TestCase;
 
 import java.util.Arrays;
 
