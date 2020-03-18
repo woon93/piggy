@@ -42,5 +42,18 @@ public class RegisterInfoService {
         return mapping.insertSelective(info);
     }
 
+    public int updatePortrait(String account,byte[] portriat){
+        RegisterInfo upInfo = new RegisterInfo();
+        upInfo.setAccount(account);
+        upInfo.setPortraitData(portriat);
+
+        RegisterInfoExample example = new RegisterInfoExample();
+        RegisterInfoExample.Criteria criteria = example.createCriteria();
+        // 【KEY】
+        criteria.andAccountEqualTo(account);
+        criteria.andDelflagNotEqualTo("1");
+
+        return mapping.updateByExampleSelective(upInfo,example);
+    }
 
 }

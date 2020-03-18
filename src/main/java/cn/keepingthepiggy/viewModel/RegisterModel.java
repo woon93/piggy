@@ -20,4 +20,7 @@ public class RegisterModel {
     private String externalName;
     private String icon;
     private String iconUrl;
+
+    @Mapping("portraitData")
+    private String portrait;
 }

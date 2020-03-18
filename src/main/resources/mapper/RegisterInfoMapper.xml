@@ -13,11 +13,13 @@
     <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="address" property="address" jdbcType="VARCHAR" />
     <result column="signature" property="signature" jdbcType="VARCHAR" />
-    <result column="portraitURL" property="portraiturl" jdbcType="VARCHAR" />
     <result column="extension_token" property="extensionToken" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="delFlag" property="delflag" jdbcType="CHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="cn.keepingthepiggy.dataModel.RegisterInfo" extends="BaseResultMap" >
+    <result column="portrait_data" property="portraitData" jdbcType="LONGVARBINARY" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -79,8 +81,27 @@
   </sql>
   <sql id="Base_Column_List" >
     urzid, permission, account, pazword, sex, age, hometown, phone, email, address, signature, 
-    portraitURL, extension_token, create_time, update_time, delFlag
+    extension_token, create_time, update_time, delFlag
   </sql>
+  <sql id="Blob_Column_List" >
+    portrait_data
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="cn.keepingthepiggy.dataModel.RegisterInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from register_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.keepingthepiggy.dataModel.RegisterInfoExample" >
     select
     <if test="distinct" >
@@ -105,14 +126,14 @@
     insert into register_info (urzid, permission, account, 
       pazword, sex, age, hometown, 
       phone, email, address, 
-      signature, portraitURL, extension_token, 
-      create_time, update_time, delFlag
+      signature, extension_token, create_time, 
+      update_time, delFlag, portrait_data
       )
     values (#{urzid,jdbcType=SMALLINT}, #{permission,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR}, 
       #{pazword,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{age,jdbcType=INTEGER}, #{hometown,jdbcType=VARCHAR}, 
       #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
-      #{signature,jdbcType=VARCHAR}, #{portraiturl,jdbcType=VARCHAR}, #{extensionToken,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{delflag,jdbcType=CHAR}
+      #{signature,jdbcType=VARCHAR}, #{extensionToken,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{delflag,jdbcType=CHAR}, #{portraitData,jdbcType=LONGVARBINARY}
       )
   </insert>
   <insert id="insertSelective" parameterType="cn.keepingthepiggy.dataModel.RegisterInfo" >
@@ -151,9 +172,6 @@
       <if test="signature != null" >
         signature,
       </if>
-      <if test="portraiturl != null" >
-        portraitURL,
-      </if>
       <if test="extensionToken != null" >
         extension_token,
       </if>
@@ -165,6 +183,9 @@
       </if>
       <if test="delflag != null" >
         delFlag,
+      </if>
+      <if test="portraitData != null" >
+        portrait_data,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -201,9 +222,6 @@
       <if test="signature != null" >
         #{signature,jdbcType=VARCHAR},
       </if>
-      <if test="portraiturl != null" >
-        #{portraiturl,jdbcType=VARCHAR},
-      </if>
       <if test="extensionToken != null" >
         #{extensionToken,jdbcType=VARCHAR},
       </if>
@@ -215,6 +233,9 @@
       </if>
       <if test="delflag != null" >
         #{delflag,jdbcType=CHAR},
+      </if>
+      <if test="portraitData != null" >
+        #{portraitData,jdbcType=LONGVARBINARY},
       </if>
     </trim>
   </insert>
@@ -260,9 +281,6 @@
       <if test="record.signature != null" >
         signature = #{record.signature,jdbcType=VARCHAR},
       </if>
-      <if test="record.portraiturl != null" >
-        portraitURL = #{record.portraiturl,jdbcType=VARCHAR},
-      </if>
       <if test="record.extensionToken != null" >
         extension_token = #{record.extensionToken,jdbcType=VARCHAR},
       </if>
@@ -275,7 +293,32 @@
       <if test="record.delflag != null" >
         delFlag = #{record.delflag,jdbcType=CHAR},
       </if>
+      <if test="record.portraitData != null" >
+        portrait_data = #{record.portraitData,jdbcType=LONGVARBINARY},
+      </if>
     </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update register_info
+    set urzid = #{record.urzid,jdbcType=SMALLINT},
+      permission = #{record.permission,jdbcType=INTEGER},
+      account = #{record.account,jdbcType=VARCHAR},
+      pazword = #{record.pazword,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=CHAR},
+      age = #{record.age,jdbcType=INTEGER},
+      hometown = #{record.hometown,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      signature = #{record.signature,jdbcType=VARCHAR},
+      extension_token = #{record.extensionToken,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      delFlag = #{record.delflag,jdbcType=CHAR},
+      portrait_data = #{record.portraitData,jdbcType=LONGVARBINARY}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -293,7 +336,6 @@
       email = #{record.email,jdbcType=VARCHAR},
       address = #{record.address,jdbcType=VARCHAR},
       signature = #{record.signature,jdbcType=VARCHAR},
-      portraitURL = #{record.portraiturl,jdbcType=VARCHAR},
       extension_token = #{record.extensionToken,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},

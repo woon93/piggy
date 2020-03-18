@@ -1,12 +1,11 @@
 package cn.keepingthepiggy.dao;
 
-import cn.keepingthepiggy.dataModel.RegisterInfoExample;
 import cn.keepingthepiggy.dataModel.RegisterInfo;
-
-import java.util.List;
-
+import cn.keepingthepiggy.dataModel.RegisterInfoExample;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
 public interface RegisterInfoMapper {
@@ -18,9 +17,13 @@ public interface RegisterInfoMapper {
 
     int insertSelective(RegisterInfo record);
 
+    List<RegisterInfo> selectByExampleWithBLOBs(RegisterInfoExample example);
+
     List<RegisterInfo> selectByExample(RegisterInfoExample example);
 
     int updateByExampleSelective(@Param("record") RegisterInfo record, @Param("example") RegisterInfoExample example);
+
+    int updateByExampleWithBLOBs(@Param("record") RegisterInfo record, @Param("example") RegisterInfoExample example);
 
     int updateByExample(@Param("record") RegisterInfo record, @Param("example") RegisterInfoExample example);
 }

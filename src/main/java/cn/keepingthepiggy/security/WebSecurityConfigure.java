@@ -77,7 +77,10 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
 
                 .httpBasic()
                 .disable()
-                .csrf().disable();
+                .csrf().disable()
+            .sessionManagement()
+                .maximumSessions(1);// 最大会话数量，设置为1表示一个用户只能有一个会话
+                //.expiredSessionStrategy()//会话过期策略
     }
 
 

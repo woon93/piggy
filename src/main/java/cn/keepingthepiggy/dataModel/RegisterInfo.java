@@ -25,8 +25,6 @@ public class RegisterInfo {
 
     private String signature;
 
-    private String portraiturl;
-
     private String extensionToken;
 
     private Date createTime;
@@ -34,6 +32,8 @@ public class RegisterInfo {
     private Date updateTime;
 
     private String delflag;
+
+    private byte[] portraitData;
 
     public Short getUrzid() {
         return urzid;
@@ -123,14 +123,6 @@ public class RegisterInfo {
         this.signature = signature == null ? null : signature.trim();
     }
 
-    public String getPortraiturl() {
-        return portraiturl;
-    }
-
-    public void setPortraiturl(String portraiturl) {
-        this.portraiturl = portraiturl == null ? null : portraiturl.trim();
-    }
-
     public String getExtensionToken() {
         return extensionToken;
     }
@@ -161,5 +153,13 @@ public class RegisterInfo {
 
     public void setDelflag(String delflag) {
         this.delflag = delflag == null ? null : delflag.trim();
+    }
+
+    public byte[] getPortraitData() {
+        return portraitData;
+    }
+
+    public void setPortraitData(byte[] portraitData) {
+        this.portraitData = portraitData;
     }
 }
