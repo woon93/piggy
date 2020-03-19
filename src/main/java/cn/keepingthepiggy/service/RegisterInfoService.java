@@ -35,7 +35,7 @@ public class RegisterInfoService {
         criteria.andPazwordEqualTo(info.getPazword());
         criteria.andDelflagNotEqualTo("1");
         //  excute Mapper
-        return mapping.selectByExample(example);
+        return mapping.selectByExampleWithBLOBs(example);
     }
 
     public int insertRegister(RegisterInfo info){

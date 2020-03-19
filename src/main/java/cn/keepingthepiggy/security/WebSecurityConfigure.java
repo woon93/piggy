@@ -1,5 +1,12 @@
 package cn.keepingthepiggy.security;
 
+import cn.keepingthepiggy.dao.RegisterInfoMapper;
+import cn.keepingthepiggy.dataModel.RegisterInfo;
+import cn.keepingthepiggy.dataModel.RegisterInfoExample;
+import cn.keepingthepiggy.service.RegisterInfoService;
+import cn.keepingthepiggy.util.GeneralConvertor;
+import cn.keepingthepiggy.util.JSONChange;
+import cn.keepingthepiggy.viewModel.RegisterModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -23,6 +30,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Configuration
@@ -32,6 +40,14 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private RegisterInfoService registerInfoService;
+
+    @Autowired
+    private GeneralConvertor convertor;
+
+    @Autowired
+    private RegisterInfoMapper mapping;
 
     /**
      * 需要放行的URL
@@ -128,12 +144,43 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
                 map.put("status", 200);
                 map.put("flag", 1);
                 // 将身份信息放入msg
-                map.put("msg", authentication.getPrincipal());
+//                map.put("msg", authentication.getPrincipal());
+                // 将用户信息放入map
+                RegisterModel info = getUserDateWhenLogin(authentication.getName());
+                map.put("info", JSONChange.objToJson(info));
+
                 out.write(new ObjectMapper().writeValueAsString(map));
                 out.flush();
                 out.close();
             }
         });
         return filter;
+    }
+
+    private RegisterModel getUserDateWhenLogin(String username) {
+        RegisterInfo registerInfo = new RegisterInfo();
+        registerInfo.setAccount(username);
+
+        RegisterInfoExample example = new RegisterInfoExample();
+        RegisterInfoExample.Criteria criteria = example.createCriteria();
+        // 【KEY】
+        criteria.andAccountEqualTo(username);
+        criteria.andDelflagNotEqualTo("1");
+        //  excute Mapper
+        List<RegisterInfo> infos = mapping.selectByExampleWithBLOBs(example);
+
+        if (!infos.isEmpty()) {
+            RegisterModel info = new RegisterModel();
+            RegisterInfo infoDB = infos.get(0);
+            infoDB.setPazword(null);
+            // 提取图片的by64码
+            byte[] pottraitBuffer = infoDB.getPortraitData();
+            String pottraitStr = new String(pottraitBuffer);
+
+            convertor.convertor(infoDB, info);
+            info.setPortrait(pottraitStr);
+            return  info;
+        }
+        return  null;
     }
 }
