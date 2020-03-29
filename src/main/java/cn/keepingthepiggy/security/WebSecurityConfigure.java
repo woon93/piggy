@@ -120,10 +120,10 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
             }
 
             @Override
-            public boolean matches(CharSequence charSequence, String s) {
+            public boolean matches(CharSequence charSequence, String pazwd) {
                 Assert.notNull(charSequence, "Password must not bo null!!!");
-                Assert.notNull(s, "Password must not bo null!!!");
-                return s.equals(charSequence.toString());
+                Assert.notNull(pazwd, "Password must not bo null!!!");
+                return pazwd.equals(charSequence.toString());
             }
         };
     }
@@ -172,6 +172,7 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
         if (!infos.isEmpty()) {
             RegisterModel info = new RegisterModel();
             RegisterInfo infoDB = infos.get(0);
+            // 不能把密码也返回去，密码要置空
             infoDB.setPazword(null);
             // 提取图片的by64码
             byte[] pottraitBuffer = infoDB.getPortraitData();

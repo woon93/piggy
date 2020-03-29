@@ -33,7 +33,10 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名-->
-        <table tableName="register_info" domainObjectName="RegisterInfo"></table>
+<!--        <table tableName="register_info" domainObjectName="RegisterInfo"></table>-->
+<!--        <table tableName="register" domainObjectName="Register"></table>-->
+        <table tableName="urz_info" domainObjectName="UrzInfo"></table>
+<!--        <table tableName="node_info" domainObjectName="NodeInfo"></table>-->
         <!--<table tableName="article" domainObjectName="ArticlePO"></table>-->
         <!--<table tableName="databank" domainObjectName="DatabankPO"></table>-->
         <!--<table tableName="sysinfo" domainObjectName="SysInfoPO"></table>-->

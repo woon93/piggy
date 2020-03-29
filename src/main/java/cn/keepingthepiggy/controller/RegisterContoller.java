@@ -184,7 +184,7 @@ public class RegisterContoller {
             return responsible;
         }
 
-        if (info != null) {
+        if (!"".equals(info.getUsername())) {
             logger.info("login:" + info.toString());
             RegisterInfo registerInfo = new RegisterInfo();
             convertor.convertor(info, registerInfo);

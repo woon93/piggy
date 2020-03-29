@@ -9,7 +9,7 @@
         debug="false" scan="true" scanPeriod="10 second">
 
     <!-- 配置日志输出目录文件夹以及进行重命名 -->
-    <property name="PROJECT" value="Myshow-logs" />
+    <property name="PROJECT" value="myshow-logs" />
     <property name="ROOT" value="../${PROJECT}/" />
     <!-- 配置日志文件大小 -->
     <property name="FILESIZE" value="50MB" />

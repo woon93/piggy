@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.keepingthepiggy.dao.NodeInfoMapper" >
+  <resultMap id="BaseResultMap" type="cn.keepingthepiggy.dataModel.NodeInfo" >
+    <result column="node_id" property="nodeId" jdbcType="VARCHAR" />
+    <result column="urzid" property="urzid" jdbcType="INTEGER" />
+    <result column="classify" property="classify" jdbcType="INTEGER" />
+    <result column="pre_node_id" property="preNodeId" jdbcType="VARCHAR" />
+    <result column="next_node_id" property="nextNodeId" jdbcType="VARCHAR" />
+    <result column="tier" property="tier" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="tag" property="tag" jdbcType="VARCHAR" />
+    <result column="picture_url" property="pictureUrl" jdbcType="VARCHAR" />
+    <result column="multimedia_url" property="multimediaUrl" jdbcType="VARCHAR" />
+    <result column="file_url" property="fileUrl" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="visibility" property="visibility" jdbcType="INTEGER" />
+    <result column="readable_urzid" property="readableUrzid" jdbcType="VARCHAR" />
+    <result column="exclude_urzid" property="excludeUrzid" jdbcType="VARCHAR" />
+    <result column="delete" property="delete" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="cn.keepingthepiggy.dataModel.NodeInfoWithBLOBs" extends="BaseResultMap" >
+    <result column="text" property="text" jdbcType="LONGVARCHAR" />
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    node_id, urzid, classify, pre_node_id, next_node_id, tier, title, tag, picture_url, 
+    multimedia_url, file_url, create_time, update_time, visibility, readable_urzid, exclude_urzid, 
+    delete
+  </sql>
+  <sql id="Blob_Column_List" >
+    text, content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="cn.keepingthepiggy.dataModel.NodeInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from node_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.keepingthepiggy.dataModel.NodeInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from node_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="cn.keepingthepiggy.dataModel.NodeInfoExample" >
+    delete from node_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.keepingthepiggy.dataModel.NodeInfoWithBLOBs" >
+    insert into node_info (node_id, urzid, classify, 
+      pre_node_id, next_node_id, tier, 
+      title, tag, picture_url, 
+      multimedia_url, file_url, create_time, 
+      update_time, visibility, readable_urzid, 
+      exclude_urzid, delete, text, 
+      content)
+    values (#{nodeId,jdbcType=VARCHAR}, #{urzid,jdbcType=INTEGER}, #{classify,jdbcType=INTEGER}, 
+      #{preNodeId,jdbcType=VARCHAR}, #{nextNodeId,jdbcType=VARCHAR}, #{tier,jdbcType=INTEGER}, 
+      #{title,jdbcType=VARCHAR}, #{tag,jdbcType=VARCHAR}, #{pictureUrl,jdbcType=VARCHAR}, 
+      #{multimediaUrl,jdbcType=VARCHAR}, #{fileUrl,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{visibility,jdbcType=INTEGER}, #{readableUrzid,jdbcType=VARCHAR}, 
+      #{excludeUrzid,jdbcType=VARCHAR}, #{delete,jdbcType=INTEGER}, #{text,jdbcType=LONGVARCHAR}, 
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.keepingthepiggy.dataModel.NodeInfoWithBLOBs" >
+    insert into node_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="nodeId != null" >
+        node_id,
+      </if>
+      <if test="urzid != null" >
+        urzid,
+      </if>
+      <if test="classify != null" >
+        classify,
+      </if>
+      <if test="preNodeId != null" >
+        pre_node_id,
+      </if>
+      <if test="nextNodeId != null" >
+        next_node_id,
+      </if>
+      <if test="tier != null" >
+        tier,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="tag != null" >
+        tag,
+      </if>
+      <if test="pictureUrl != null" >
+        picture_url,
+      </if>
+      <if test="multimediaUrl != null" >
+        multimedia_url,
+      </if>
+      <if test="fileUrl != null" >
+        file_url,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="visibility != null" >
+        visibility,
+      </if>
+      <if test="readableUrzid != null" >
+        readable_urzid,
+      </if>
+      <if test="excludeUrzid != null" >
+        exclude_urzid,
+      </if>
+      <if test="delete != null" >
+        delete,
+      </if>
+      <if test="text != null" >
+        text,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="nodeId != null" >
+        #{nodeId,jdbcType=VARCHAR},
+      </if>
+      <if test="urzid != null" >
+        #{urzid,jdbcType=INTEGER},
+      </if>
+      <if test="classify != null" >
+        #{classify,jdbcType=INTEGER},
+      </if>
+      <if test="preNodeId != null" >
+        #{preNodeId,jdbcType=VARCHAR},
+      </if>
+      <if test="nextNodeId != null" >
+        #{nextNodeId,jdbcType=VARCHAR},
+      </if>
+      <if test="tier != null" >
+        #{tier,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null" >
+        #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureUrl != null" >
+        #{pictureUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="multimediaUrl != null" >
+        #{multimediaUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="fileUrl != null" >
+        #{fileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="visibility != null" >
+        #{visibility,jdbcType=INTEGER},
+      </if>
+      <if test="readableUrzid != null" >
+        #{readableUrzid,jdbcType=VARCHAR},
+      </if>
+      <if test="excludeUrzid != null" >
+        #{excludeUrzid,jdbcType=VARCHAR},
+      </if>
+      <if test="delete != null" >
+        #{delete,jdbcType=INTEGER},
+      </if>
+      <if test="text != null" >
+        #{text,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.keepingthepiggy.dataModel.NodeInfoExample" resultType="java.lang.Integer" >
+    select count(*) from node_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update node_info
+    <set >
+      <if test="record.nodeId != null" >
+        node_id = #{record.nodeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.urzid != null" >
+        urzid = #{record.urzid,jdbcType=INTEGER},
+      </if>
+      <if test="record.classify != null" >
+        classify = #{record.classify,jdbcType=INTEGER},
+      </if>
+      <if test="record.preNodeId != null" >
+        pre_node_id = #{record.preNodeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nextNodeId != null" >
+        next_node_id = #{record.nextNodeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tier != null" >
+        tier = #{record.tier,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tag != null" >
+        tag = #{record.tag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pictureUrl != null" >
+        picture_url = #{record.pictureUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.multimediaUrl != null" >
+        multimedia_url = #{record.multimediaUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileUrl != null" >
+        file_url = #{record.fileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.visibility != null" >
+        visibility = #{record.visibility,jdbcType=INTEGER},
+      </if>
+      <if test="record.readableUrzid != null" >
+        readable_urzid = #{record.readableUrzid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.excludeUrzid != null" >
+        exclude_urzid = #{record.excludeUrzid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delete != null" >
+        delete = #{record.delete,jdbcType=INTEGER},
+      </if>
+      <if test="record.text != null" >
+        text = #{record.text,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update node_info
+    set node_id = #{record.nodeId,jdbcType=VARCHAR},
+      urzid = #{record.urzid,jdbcType=INTEGER},
+      classify = #{record.classify,jdbcType=INTEGER},
+      pre_node_id = #{record.preNodeId,jdbcType=VARCHAR},
+      next_node_id = #{record.nextNodeId,jdbcType=VARCHAR},
+      tier = #{record.tier,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      tag = #{record.tag,jdbcType=VARCHAR},
+      picture_url = #{record.pictureUrl,jdbcType=VARCHAR},
+      multimedia_url = #{record.multimediaUrl,jdbcType=VARCHAR},
+      file_url = #{record.fileUrl,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      visibility = #{record.visibility,jdbcType=INTEGER},
+      readable_urzid = #{record.readableUrzid,jdbcType=VARCHAR},
+      exclude_urzid = #{record.excludeUrzid,jdbcType=VARCHAR},
+      delete = #{record.delete,jdbcType=INTEGER},
+      text = #{record.text,jdbcType=LONGVARCHAR},
+      content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update node_info
+    set node_id = #{record.nodeId,jdbcType=VARCHAR},
+      urzid = #{record.urzid,jdbcType=INTEGER},
+      classify = #{record.classify,jdbcType=INTEGER},
+      pre_node_id = #{record.preNodeId,jdbcType=VARCHAR},
+      next_node_id = #{record.nextNodeId,jdbcType=VARCHAR},
+      tier = #{record.tier,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      tag = #{record.tag,jdbcType=VARCHAR},
+      picture_url = #{record.pictureUrl,jdbcType=VARCHAR},
+      multimedia_url = #{record.multimediaUrl,jdbcType=VARCHAR},
+      file_url = #{record.fileUrl,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      visibility = #{record.visibility,jdbcType=INTEGER},
+      readable_urzid = #{record.readableUrzid,jdbcType=VARCHAR},
+      exclude_urzid = #{record.excludeUrzid,jdbcType=VARCHAR},
+      delete = #{record.delete,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
