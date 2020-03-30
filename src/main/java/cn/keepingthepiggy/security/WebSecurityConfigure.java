@@ -3,7 +3,7 @@ package cn.keepingthepiggy.security;
 import cn.keepingthepiggy.dao.RegisterInfoMapper;
 import cn.keepingthepiggy.dataModel.RegisterInfo;
 import cn.keepingthepiggy.dataModel.RegisterInfoExample;
-import cn.keepingthepiggy.service.RegisterInfoService;
+import cn.keepingthepiggy.service.demo.RegisterInfoService;
 import cn.keepingthepiggy.util.GeneralConvertor;
 import cn.keepingthepiggy.util.JSONChange;
 import cn.keepingthepiggy.viewModel.RegisterModel;
@@ -22,7 +22,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.util.Assert;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -49,6 +48,9 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
     @Autowired
     private RegisterInfoMapper mapping;
 
+    @Autowired
+    private UserDetailsService userService;
+
     /**
      * 需要放行的URL
      */
@@ -57,8 +59,6 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
             "/oauth/**",
     };
 
-    @Autowired
-    private UserDetailsService userService;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -113,19 +113,21 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
      */
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder() {
-            @Override
-            public String encode(CharSequence charSequence) {
-                return charSequence.toString();
-            }
-
-            @Override
-            public boolean matches(CharSequence charSequence, String pazwd) {
-                Assert.notNull(charSequence, "Password must not bo null!!!");
-                Assert.notNull(pazwd, "Password must not bo null!!!");
-                return pazwd.equals(charSequence.toString());
-            }
-        };
+//        return new BCryptPasswordEncoder() {
+//            @Override
+//            public String encode(CharSequence charSequence) {
+//                Assert.notNull(charSequence, "Password must not bo null!!!");
+//                return charSequence.toString();
+//            }
+//
+//            @Override
+//            public boolean matches(CharSequence charSequence, String pazwd) {
+//                Assert.notNull(charSequence, "Password must not bo null!!!");
+//                Assert.notNull(pazwd, "Password must not bo null!!!");
+//                return pazwd.equals(charSequence.toString());
+//            }
+//        };
+        return new BCryptPasswordEncoder(9) {};
     }
 
     @Bean

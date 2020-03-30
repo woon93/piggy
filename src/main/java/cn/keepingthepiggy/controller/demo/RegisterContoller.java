@@ -1,8 +1,8 @@
-package cn.keepingthepiggy.controller;
+package cn.keepingthepiggy.controller.demo;
 
 import cn.keepingthepiggy.configuration.Constant;
 import cn.keepingthepiggy.dataModel.RegisterInfo;
-import cn.keepingthepiggy.service.RegisterInfoService;
+import cn.keepingthepiggy.service.demo.RegisterInfoService;
 import cn.keepingthepiggy.util.GeneralConvertor;
 import cn.keepingthepiggy.util.JSONChange;
 import cn.keepingthepiggy.viewModel.RegisterModel;

@@ -1,4 +1,4 @@
-package cn.keepingthepiggy.service;
+package cn.keepingthepiggy.service.demo;
 
 import cn.keepingthepiggy.dao.RegisterInfoMapper;
 import cn.keepingthepiggy.dataModel.RegisterInfo;

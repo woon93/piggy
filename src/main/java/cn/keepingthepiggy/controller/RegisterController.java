@@ -1,4 +1,4 @@
 package cn.keepingthepiggy.controller;
 
-public class PersonalController {
+public class RegisterController {
 }

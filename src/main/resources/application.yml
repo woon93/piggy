@@ -13,8 +13,8 @@ spring:
 
   datasource:  #数据库相关
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/myshow?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
-    # url: jdbc:mysql://49.234.205.150:3306/myshow?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
+    # url: jdbc:mysql://127.0.0.1:3306/myshow?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://49.234.205.150:3306/myshow?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
     username: wang
     password: dawang
 #    max-idle: 10
