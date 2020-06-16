@@ -1,13 +1,13 @@
 package LeetCode;
 
-import LeetCode.testCase.Eight;
+import LeetCode.testCase.Ten;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 public class TestMain {
 
-    private static TestCase test = new Eight();
+    private static TestCase test = new Ten();
 
     public static void main(String[] args) {
         ////////////////////////////////////////////////////
